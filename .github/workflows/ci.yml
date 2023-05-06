@@ -23,7 +23,7 @@ jobs:
         id: go
 
       - name: Check Out code into the Go module directory
-        run: actions/setup-go@v3
+        uses: actions/setup-go@v3
 
       - name: Test
         run: make test
