@@ -46,7 +46,7 @@ jobs:
 
       - name: Run Migrations
         run: |
-          cd ../..
+          -l
           make migrateup
 
       - name: Test
