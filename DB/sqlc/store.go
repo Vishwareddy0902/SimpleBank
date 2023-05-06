@@ -41,12 +41,12 @@ func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 type TransferTxParams struct {
 	FromAccountID int64 `json:"from_account_id"`
 	ToAccountID   int64 `json:"to_account_id"`
-	Amount        int64 `jsom:"amount"`
+	Amount        int64 `json:"amount"`
 }
 
 // TransferTxResuts contains the result of the transfer Transaction
 type TransferTxResuts struct {
-	Transfer    Transfer `jsom:"transfer"`
+	Transfer    Transfer `json:"transfer"`
 	FromAccount Account  `json:"from_account"`
 	ToAccount   Account  `json:"to_account"`
 	FromEntry   Entry    `json:"from_entry"`
@@ -88,9 +88,9 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 		//get account -> Update account balance
 		//fmt.Println(txName, "get account1")
 		if arg.FromAccountID < arg.ToAccountID {
-			result.FromAccount, result.ToAccount, err = addAmountToAccount(ctx, q, arg.FromAccountID, -arg.Amount, arg.ToAccountID, arg.Amount)
+			result.FromAccount, result.ToAccount, _ = addAmountToAccount(ctx, q, arg.FromAccountID, -arg.Amount, arg.ToAccountID, arg.Amount)
 		} else {
-			result.ToAccount, result.FromAccount, err = addAmountToAccount(ctx, q, arg.ToAccountID, arg.Amount, arg.FromAccountID, -arg.Amount)
+			result.ToAccount, result.FromAccount, _ = addAmountToAccount(ctx, q, arg.ToAccountID, arg.Amount, arg.FromAccountID, -arg.Amount)
 		}
 
 		return nil
