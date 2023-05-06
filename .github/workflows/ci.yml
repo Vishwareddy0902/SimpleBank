@@ -20,6 +20,8 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: simple_bank
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -35,6 +37,11 @@ jobs:
 
       - name: Check Out code into the Go module directory
         uses: actions/checkout@v2
+      - name: Install Go-Migrate
+        run: |
+          curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-amd64.tar.gz | tar xvz
+          sudo mv migrate.linux-amd64 /usr/bin/migrate
+          which migrate
 
       - name: Run Migrations
         run: make migrateup
