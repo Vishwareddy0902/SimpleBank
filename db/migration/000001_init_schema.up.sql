@@ -3,7 +3,8 @@ CREATE TABLE "accounts" (
   "owner" varchar NOT NULL,
   "balance" bigint NOT NULL,
   "currency" varchar NOT NULL,
-  "created_at" timestamptz NOT NULL DEFAULT 'now()'
+  "created_at" timestamptz NOT NULL DEFAULT 'now()',
+  CONSTRAINT account_bal_chk CHECK(balance>=0)
 );
 
 CREATE TABLE "entries" (
