@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	ErrExpToken     = errors.New("ioken has expired")
+	ErrExpToken     = errors.New("token has expired")
 	ErrInvalidToken = errors.New("token is invalid")
 )
 
